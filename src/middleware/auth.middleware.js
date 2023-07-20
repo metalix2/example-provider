@@ -5,7 +5,7 @@ const isValidAuthTimestamp = (timestamp) => {
 };
 
 const authMiddleware = (req, res, next) => {
-    if (!req.headers['x-authorization'] || !req.headers.authorization ) {
+    if (!req.headers['x-authorization'] && !req.headers.authorization ) {
         return res.status(401).json({ error: "Unauthorized" });
     }
     let timestamp;

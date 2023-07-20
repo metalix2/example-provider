@@ -30,7 +30,7 @@ const stateHandlers = {
 };
 
 const requestFilter = (req, res, next) => {
-  if (!req.headers["authorization"] || !req.headers["x-authorization"] ) {
+  if (!req.headers["authorization"] && !req.headers["x-authorization"] ) {
     next();
     return;
   }
