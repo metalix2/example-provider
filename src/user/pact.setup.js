@@ -28,6 +28,7 @@ const requestFilter = (req, res, next) => {
     return;
   }
   req.headers["authorization"] = `Bearer ${new Date().toISOString()}`;
+  req.headers["x-authorization"] = `Bearer ${new Date().toISOString()}`;
   next();
 };
 
