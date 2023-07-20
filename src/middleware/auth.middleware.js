@@ -5,10 +5,16 @@ const isValidAuthTimestamp = (timestamp) => {
 };
 
 const authMiddleware = (req, res, next) => {
-    if (!req.headers['X-Authorization']) {
+    if (!req.headers['X-Authorization'] || !req.headers.authorization ) {
         return res.status(401).json({ error: "Unauthorized" });
     }
-    const timestamp = req.headers['X-Authorization'].replace("Bearer ", "")
+    let timestamp;
+    try {
+        timestamp = req.headers['X-Authorization'].replace("Bearer ", "")        
+    } catch(e) {
+        timestamp = req.headers.authorization.replace("Bearer ", "")        
+    }
+    
     if (!isValidAuthTimestamp(timestamp)) {
         return res.status(401).json({ error: "Unauthorized" });
     }
