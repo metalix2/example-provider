@@ -30,11 +30,12 @@ const stateHandlers = {
 };
 
 const requestFilter = (req, res, next) => {
-  if (!req.headers["authorization"]) {
+  if (!req.headers["authorization"] && !req.headers["x-authorization"] ) {
     next();
     return;
   }
   req.headers["authorization"] = `Bearer ${new Date().toISOString()}`;
+  req.headers["x-authorization"] = `Bearer ${new Date().toISOString()}`;
   next();
 };
 
